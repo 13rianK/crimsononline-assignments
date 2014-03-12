@@ -21,7 +21,7 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=512, blank=False)
     post = models.TextField(blank=False, null=False)
     # If no time is given, default to time at which BlogPost is created
-    time = models.DateTimeField()
+    time = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
         return '/posts/' + str(self.id)
