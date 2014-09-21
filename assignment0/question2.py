@@ -23,3 +23,6 @@ not contained in the sentence. I created one that used sentence as its
 filter for what to sort, but that included punctuation as well. I decided it
 was better to swap with punctuation and spaces then to insert new characters
 into the string"""
+
+#test functions can be found in question5b.py
+# run the function to test that what is printed out is correct.

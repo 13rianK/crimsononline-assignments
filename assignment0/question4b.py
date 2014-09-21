@@ -10,3 +10,6 @@ never choosing to face forward.
 This is equal to 0.47
 The probability luigi wins is 1-0.47 = 53% of the
 """
+
+#test functions can be found in question5b.py
+# run the function to test that what is printed out is correct.

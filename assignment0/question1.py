@@ -14,5 +14,5 @@ def fizzbuzz ():
 	return None
 
 
+#test functions can be found in question5b.py
 # run the function to test that what is printed out is correct.
-fizzbuzz()

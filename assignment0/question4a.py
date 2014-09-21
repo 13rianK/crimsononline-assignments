@@ -37,3 +37,6 @@ def luigi_is_a_boss (trials) :
 	return wins/float(trials)
 
 print luigi_is_a_boss(100)
+
+#test functions can be found in question5b.py
+# run the function to test that what is printed out is correct.
