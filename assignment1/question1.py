@@ -7,6 +7,10 @@ objectives
     - work with the file system
 """
 
+#import key libraries
+import string
+
+
 def common_words(filename):
     """question 1a
 
@@ -14,7 +18,20 @@ def common_words(filename):
     should open the file, count the number of occurrences of each word, and
     return a sorted list of the most common words.
     """
-    pass
+
+    #open and read in the filename and then close the file
+    f = open(filename)
+    words = f.read().split
+    f.close()
+
+    # create dictionary for the word count
+    wordcount = {}
+
+    # loop over the words counting them
+    for word in words :
+        wordcount.get(word, 0) + 1
+
+    return sorted(wordcount.keys(), key= lambda count : wordcount[count], reverse=True)
 
 def common_words_min(filename, min_chars):
     """question 1b
@@ -22,7 +39,14 @@ def common_words_min(filename, min_chars):
     Modify this function to take a second argument that specifies the
     minimum number of characters long a word can be to be counted.
     """
-    pass
+
+    #use previous functiont to get sorted dict
+    lst = common_words(filename)
+
+    for element in lst :
+        if element.len() < min_chars : lst.remove(element)
+
+    return lis
 
 def common_words_tuple(filename, min_chars):
     """question 1c
@@ -32,7 +56,13 @@ def common_words_tuple(filename, min_chars):
         (word, number of occurrences)
     Of course, the list of tuples should still be sorted as in part a.
     """
-    pass
+    
+    #use previous function to get sorted dictionary with minimums removed
+    lst = common_words_min(filename, min_chars)
+
+    return [(word, count) for word, count in lst.iteritems()]
+
+
 
 def common_words_safe(filename, min_chars):
     """question 1d
@@ -40,4 +70,9 @@ def common_words_safe(filename, min_chars):
     Modify your function so that it catches the IOError exception and prints
     a friendly error message.
     """
-    pass
+    try : 
+        common_words_tuple(filename, min_chars)
+    except IOError :
+        print "Error: IOError"
+
+    return
