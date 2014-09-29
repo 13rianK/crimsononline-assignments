@@ -1,5 +1,5 @@
 import json
-from PIL import Image
+from pillow import Image
 import datetime
 
 class Article:
