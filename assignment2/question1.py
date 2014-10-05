@@ -1,3 +1,6 @@
+from datetime import *
+from PIL import Image
+
 class Content(object):
     '''
     Required properties:
@@ -20,8 +23,16 @@ class Content(object):
                 self.title, self.subtitle, self.creator, self.pubdate
                 )
 
-    def matches_url (self):
-        ...
+    def matches_url (self, url):
+        # I took slug to mean title
+        if "http://thecrimson.com/{0}/{1}/{2}/{3}/{4}/".format(
+                    self.__class__.__name__, 
+                    self.pubdate.year, 
+                    self.pubdate.month, 
+                    self.pubdate.day,
+                    self.title
+                    ) == url : True
+        else : False
 
 
 
@@ -35,7 +46,7 @@ class Article(Content):
     '''
     
     def __init__(self, title, subtitle, creator, pubdate):
-        super(Content, self).__init__(title,subtitle, creator, pubdate)
+        Content.__init__(self,title,subtitle,creator,pubdate)
 
 
 
@@ -48,33 +59,43 @@ class Picture(Content):
         - All methods of Content
     '''
     
-    def __init__(self, title, subtitle, creator, pubdate, related_image=None):
-        super(Content, self).__init__(title, subtitle, creator, pubdate)
-        self.related_image = related_image
+    #initializer for Picture class
+    def __init__(self, title, subtitle, creator, pubdate, image_path):
+        Content.__init__(self,title, subtitle, creator, pubdate)
+        self.path = image_path
 
     def show(self):
+        #print article content
         print '{0}\n{1}\n{2}\n{3}'.format(
                 self.title, self.subtitle, self.creator, self.pubdate
                 )
-        #open the image file from the path given
-        try : image = Image.open(self.image_path)
-        except IOError : 
-            print "IOError"
-
-        image.show()
-        
-
-    def matches_url(self):
+        #open the image file from the path given and display
+        Image.open(self.path).show()
 
 
 '''
 Question 1e
 '''
+
+#finds content from a given URL
 def from_url(c_lst, url):
-    pass
+    count = 0
+    place = 0
+
+    for i in range(c_lst.len()) :
+        if c_lst[i].matches_url(url) : 
+            count += 1
+            place = i
+
+    if count == 1 : return c_lst[place]
+    else: print "Multiple Content matches"
+
 
 '''
 Question 1e
 '''
 def posted_after(c_lst, dt):
-    pass
+    return [i for i in range(c_lst.len()) if c_lst[i].pubdate > dt]
+
+
+
