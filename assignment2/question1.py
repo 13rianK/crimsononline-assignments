@@ -9,7 +9,21 @@ class Content(object):
         - show
         - matches_url (question 1d)
     '''
-    pass
+    def __init__(self, title, subtitle, creator, pubdate):
+        self.title = title
+        self.subtitle = subtitle
+        self.creator = creator
+        self.pubdate = pubdate
+
+    def show(self):
+        print '{0}\n{1}\n{2}\n{3}'.format(
+                self.title, self.subtitle, self.creator, self.pubdate
+                )
+
+    def matches_url (self):
+        ...
+
+
 
 class Article(Content):
     '''
@@ -19,7 +33,11 @@ class Article(Content):
     Required methods:
         - All methods of Content
     '''
-    pass
+    
+    def __init__(self, title, subtitle, creator, pubdate):
+        super(Content, self).__init__(title,subtitle, creator, pubdate)
+
+
 
 class Picture(Content):
     '''
@@ -29,7 +47,25 @@ class Picture(Content):
     Required methods:
         - All methods of Content
     '''
-    pass
+    
+    def __init__(self, title, subtitle, creator, pubdate, related_image=None):
+        super(Content, self).__init__(title, subtitle, creator, pubdate)
+        self.related_image = related_image
+
+    def show(self):
+        print '{0}\n{1}\n{2}\n{3}'.format(
+                self.title, self.subtitle, self.creator, self.pubdate
+                )
+        #open the image file from the path given
+        try : image = Image.open(self.image_path)
+        except IOError : 
+            print "IOError"
+
+        image.show()
+        
+
+    def matches_url(self):
+
 
 '''
 Question 1e
