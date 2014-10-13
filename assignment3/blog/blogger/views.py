@@ -16,7 +16,11 @@ def blog_post(request, post_id):
     # except IndexError:
     #     raise Http404
 
-    data = {'post': post}
+    if post.is_male : moniker = 'Mr.'
+    else: moniker = 'Ms.'
+          
+    data = {'post': post, 'moniker': moniker}
+
     return render(request, 'blog_post.html', data)
 
 # Returns a webpage showing a list of all BlogPosts in the database
@@ -76,10 +80,14 @@ def author(request, author_id):
     author = get_object_or_404(Author, id=author_id) 
     posts = BlogPost.objects.filter(author=author)
     
+    if author.is_male : moniker = 'Mr.'
+    else: moniker = 'Ms.'
+
     data = {
         'author': author,
-        'posts' : posts
-    }
+        'posts' : posts,
+    	'moniker' : moniker
+	}
     
     return render(request, 'author.html', data)
 

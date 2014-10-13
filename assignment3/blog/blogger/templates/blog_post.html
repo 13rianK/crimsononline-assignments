@@ -9,7 +9,7 @@
 {% endblock %}
 {% block content %}
     <h1>{{ post.title }}</h1>
-    <p> By <a href="{{ post.author.get_absolute_url }}">{{ post.author }}</a></p>
+    <p> By {{ moniker }} <a href="{{ post.author.get_absolute_url }}">{{ post.author }}</a></p>
     <p>Posted on {{ post.time }}</p>
     {% comment %} 
         linebreaks turns linebreaks in the database into <br>s and </p>s 
