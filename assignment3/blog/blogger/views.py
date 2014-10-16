@@ -27,10 +27,8 @@ def blog_post(request, post_id):
 def all_posts(request):
     # Find all blog posts
     data = {'posts': BlogPost.objects.all()}
-    #teaser = {}
-    #for object in blogs['posts']:
-    #    teaser[object] = object.post[0:100] + '...'
-    #data = {'posts': blogs['posts'], 'teaser': teaser}
+    for post in data['posts']:
+        post.post = post.post[0:100] + '...'
     print BlogPost.objects.all()
     return render(request, 'all_blog_posts.html', data)
 
@@ -93,8 +91,7 @@ def save_author(request):
             # Find author from the form
             f = request.POST['first'].strip()
 	    l = request.POST['last'].strip()
-	    if "check" in request.POST['is_male']: g = True
-            else: g = False
+	    g = request.POST['is_male']
 	    # Create a new BlogPost object with form's data
             new_author = Author(first=f,last=l,is_male=g)
             # Validate and save the BlogPost
